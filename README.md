@@ -20,19 +20,3 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 The project uses Next.js and is based on the **hexagonal architecture**: if this application scaled up, new contexts could be created keeping separation of concerns - kind of a plug'n play folder - and avoid repetition of shared app's components.
 
-Redux is used at context level as well as a global configuration is offered shared.
-
-React-Query is used for fetching data as well as GraphQL
-
-## Using Redux with hexagonal architecture
-
-Links:
-
-- <https://www.geekyhub.in/post/handling-multiple-stores-in-react-redux-application/>
-- <https://redux-toolkit.js.org/tutorials/rtk-query>
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
