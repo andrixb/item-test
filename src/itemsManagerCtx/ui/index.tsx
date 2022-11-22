@@ -1,26 +1,13 @@
-import { Box, Typography } from '@mui/material';
-
-import { Virtuoso } from 'react-virtuoso';
-
-import { useGetItems } from '../infrastructure/hooks';
-import { ListItemComponent } from './components';
+import { Box } from '@mui/material';
+import { SearchComponent } from './components';
+import { ListContainer } from './components/ListContainer';
 
 function ItemsManagerPageHome() {
-    const { currentItems } = useGetItems();
 
     return (
         <Box>
-            {!!currentItems && (
-                <Virtuoso
-                    useWindowScroll
-                    data={currentItems}
-                    itemContent={(index, item) => (
-                        <ListItemComponent key={index} title={item.title} image={item.image}>
-                            <Typography variant="body1">{item.description}</Typography>
-                        </ListItemComponent>
-                    )}
-                />
-            )}
+            <SearchComponent />
+            <ListContainer />
         </Box>
     );
 }

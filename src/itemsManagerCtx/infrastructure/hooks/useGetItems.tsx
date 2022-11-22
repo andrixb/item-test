@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemType } from '../../domain/entities';
 import { fetchItemsBatch } from '../../domain/useCases/fetchItemsBatch';
+import { ISearchParams } from '../interfaces';
 
 export const useGetItems = () => {
     const [currentItems, setCurrentItems] = useState<ItemType[]>([]);
 
-    const receiveItems = async () => {
+    const receiveItems = async (searchParams?: ISearchParams) => {
         try {
-            const DEFAULT_PAGE = 0;
-            const { items } = await fetchItemsBatch({ page: DEFAULT_PAGE });
+            const { items } = await fetchItemsBatch({ searchParams });
             if (items) {
                 setCurrentItems(items ?? []);
             }
@@ -17,11 +17,16 @@ export const useGetItems = () => {
         }
     };
 
+    const handleSearch = (event: React.SyntheticEvent) => {
+
+    }
+
     useEffect(() => {
         receiveItems();
     }, []);
 
     return {
         currentItems,
+        handleSearch,
     };
 };

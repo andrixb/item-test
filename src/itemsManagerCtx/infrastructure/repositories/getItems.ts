@@ -1,13 +1,18 @@
 import { apiInstance } from '../../../shared/infrastructure/api/apiClient';
 import { adaptItemsResponse } from '../adapters/adaptItemsResponse';
-import { ItemsResponse, ItemsResponsePayload } from '../interfaces';
+import { ISearchParams, ItemsResponse, ItemsResponsePayload } from '../interfaces';
 
 export interface GetItemsRequest {
-    page?: number;
+    searchParams?: ISearchParams;
 }
 
-export async function getItems({ page }: GetItemsRequest): Promise<ItemsResponse> {
-    const response = await apiInstance.get<ItemsResponsePayload>(`/api/items?offset=${page ?? 0}`, {});
+export async function getItems({ searchParams }: GetItemsRequest): Promise<ItemsResponse> {
+    const response = await apiInstance.get<ItemsResponsePayload>(
+        `
+        /api/items?email=${searchParams?.email}&&title=${searchParams?.title}&&description=${searchParams?.description}&&price=${searchParams?.price}
+        `,
+        {}
+    );
 
     if (!response) {
         return [] as unknown as ItemsResponse;

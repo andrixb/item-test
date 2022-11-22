@@ -1,9 +1,10 @@
+import { ISearchParams } from '../../infrastructure/interfaces';
 import { getItems } from '../../infrastructure/repositories/getItems';
 
 interface fetchItemsBatchProps {
-    page?: number;
+    searchParams?: ISearchParams
 }
 
-export const fetchItemsBatch = async ({ page }: fetchItemsBatchProps) => {
-    return getItems({ page });
+export const fetchItemsBatch = async ({ searchParams }: fetchItemsBatchProps) => {
+    return getItems({ searchParams });
 };
