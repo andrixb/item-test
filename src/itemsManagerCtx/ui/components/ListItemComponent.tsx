@@ -9,9 +9,9 @@ interface ListItemComponentProps {
 
 export const ListItemComponent = ({ title, image, children }: ListItemComponentProps) => (
     <ListItem component="div" style={{ padding: '1rem 0.5rem' }}>
-        <Card sx={{ maxWidth: '100%' }}>
+        <Card sx={{ maxWidth: '100%'}}>
             <CardHeader title={title} />
-            <CardMedia component="img" height="194" image={image} alt={title} />
+            <CardMedia component="img" height="auto" image={image} alt={title} />
             <CardContent>{children}</CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

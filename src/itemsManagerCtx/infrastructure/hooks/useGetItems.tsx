@@ -17,12 +17,11 @@ export const useGetItems = () => {
         }
     };
 
-    useEffect(() => { 
-        receiveItems(); 
+    useEffect(() => {
+        receiveItems();
     }, []);
 
     return {
         currentItems,
-        receiveItems,
     };
 };

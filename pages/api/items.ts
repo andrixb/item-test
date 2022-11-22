@@ -5,3 +5,5 @@ export default async function handler(req: any, res: any) {
     const { data } = await axios.get(`${PUBLIC_API}/items.json`);
     res.status(200).json({ data });
 }
+
+
