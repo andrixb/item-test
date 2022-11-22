@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: true,
     env: {
-        NEXT_PUBLIC_EXT_HOSTNAME: process.env.NEXT_PUBLIC_EXT_HOSTNAME,
         NEXT_PUBLIC_INT_BASE_URL: process.env.NEXT_PUBLIC_INT_BASE_URL,
         NEXT_PUBLIC_API_FULL: process.env.NEXT_PUBLIC_API_FULL,
+        NEXT_PUBLIC_ACCESS_TOKEN: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
     },
     webpack: (config) => {
         config.module.rules.push({
@@ -16,4 +15,4 @@ const nextConfig = {
     },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;

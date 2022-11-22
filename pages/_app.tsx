@@ -1,4 +1,3 @@
-import React from 'react';
 import type { AppProps } from 'next/app';
 import { Suspense } from 'react';
 import { CircularProgress, Container, ThemeProvider } from '@mui/material';

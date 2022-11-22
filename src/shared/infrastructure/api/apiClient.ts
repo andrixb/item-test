@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getAccessToken from '../Auth';
+import getAccessToken from '../auth/getAccessToken';
 
 import interceptors from './interceptors';
 
