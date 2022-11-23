@@ -1,4 +1,3 @@
 export * from './ItemsResponsePayload';
 export * from './ItemsResponse';
 export * from './SearchParams';
-export * from './ItemsExternalResponsePayload';

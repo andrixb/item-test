@@ -1,4 +1,4 @@
-import { IItem } from '../../domain/entities';
+import { IItem } from '../../../itemsManagerCtx/domain/entities';
 
 export interface ItemsExternalResponsePayload {
     items: IItem[];

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IItem } from '../../src/itemsManagerCtx/domain/entities';
-import { ISearchParams, ItemsExternalResponsePayload } from '../../src/itemsManagerCtx/infrastructure/interfaces';
+import { ISearchParams } from '../../src/itemsManagerCtx/infrastructure/interfaces';
+import { ItemsExternalResponsePayload } from '../../src/shared/infrastructure/interfaces';
 
 const filterItems = ({ email, title, description, price }: ISearchParams, data: ItemsExternalResponsePayload) => {
     return {
