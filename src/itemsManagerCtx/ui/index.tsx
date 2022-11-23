@@ -1,12 +1,15 @@
 import { Box } from '@mui/material';
-import { useGetItems } from '../infrastructure/hooks';
+import { useGetItems, useSortItems } from '../infrastructure/hooks';
 import { SearchComponent } from './components';
 import { ListContainer } from './components/ListContainer';
+import { SortComponent } from './components/SortComponent';
 
 function ItemsManagerPageHome() {
     const { currentItems, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } =
         useGetItems();
+    const { } = useSortItems();
 
+    /** https://www.thisdot.co/blog/creating-a-global-state-with-react-hooks */
     return (
         <Box>
             <SearchComponent
@@ -15,6 +18,12 @@ function ItemsManagerPageHome() {
                 onChangePrice={onChangePrice}
                 onChangeTitle={onChangeTitle}
                 onChangeDescription={onChangeDescription}
+            />
+            <SortComponent
+                handleSortByTitle={handleSortByTitle}
+                handleSortByDescription={handleSortByDescription}
+                handleSortByEmail={handleSortByEmail}
+                handleSortByPrice={handleSortByPrice}
             />
             <ListContainer currentItems={currentItems} />
         </Box>
