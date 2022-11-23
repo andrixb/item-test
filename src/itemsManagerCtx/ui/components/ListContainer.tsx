@@ -1,13 +1,15 @@
 import { Typography } from '@mui/material';
 import { Virtuoso } from 'react-virtuoso';
-import { useGetItems } from '../../infrastructure/hooks';
+import { ItemType } from '../../domain/entities';
 import { ListItemComponent } from './ListItemComponent';
 
-export const ListContainer = () => {
-    const { currentItems } = useGetItems();
+interface ListContainerProps {
+    currentItems: ItemType[];
+}
 
-    return (
-        !!currentItems && (
+export const ListContainer = ({ currentItems }: ListContainerProps) => (
+    <>
+        {!!currentItems && (
             <Virtuoso
                 useWindowScroll
                 data={currentItems}
@@ -17,6 +19,6 @@ export const ListContainer = () => {
                     </ListItemComponent>
                 )}
             />
-        )
-    );
-};
+        )}
+    </>
+);

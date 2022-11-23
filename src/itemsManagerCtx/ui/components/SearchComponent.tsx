@@ -1,26 +1,27 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { useGetItems } from '../../infrastructure/hooks';
-import { useSearchForm } from '../../infrastructure/hooks/useSearchForm';
 import { useSearchComponentStyles } from '../styles/SearchComponent.style';
 
-export const SearchComponent = () => {
-    const { handleSearch } = useGetItems();
-    const classes = useSearchComponentStyles();
-    const { email, price, title, description, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } =
-        useSearchForm();
+interface SearchComponentProps {
+    handleSearch: (event: React.SyntheticEvent) => void;
+    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangePrice: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangeTitle: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangeDescription: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+}
 
+export const SearchComponent = ({
+    handleSearch,
+    onChangeEmail,
+    onChangePrice,
+    onChangeTitle,
+    onChangeDescription,
+}: SearchComponentProps) => {
+    const classes = useSearchComponentStyles();
     return (
         <Box component="div">
-            <Box
-                component="form"
-                autoComplete="off"
-                onSubmit={(e) => handleSearch(e, { email, price, title, description })}
-            >
-                <Box
-                    component="div"
-                    className={classes.fieldsWrapper}
-                >
+            <Box component="form" autoComplete="off" onSubmit={handleSearch} className={classes.root}>
+                <Box component="div" className={classes.fieldsWrapper}>
                     <TextField
                         name="title"
                         variant="outlined"

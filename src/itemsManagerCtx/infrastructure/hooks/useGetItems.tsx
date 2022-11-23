@@ -1,30 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ItemType } from '../../domain/entities';
 import { fetchItemsBatch } from '../../domain/useCases/fetchItemsBatch';
-import { ISearchParams } from '../interfaces';
 
 export const useGetItems = () => {
     const [currentItems, setCurrentItems] = useState<ItemType[]>([]);
+    const [email, setEmail] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [price, setPrice] = useState<string>('');
 
-    const receiveItems = async (searchParams?: ISearchParams) => {
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+        setEmail(e.currentTarget.value);
+    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+        setTitle(e.currentTarget.value);
+    const onChangePrice = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+        setPrice(e.currentTarget.value);
+    const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+        setDescription(e.currentTarget.value);
+
+    const handleSearch = useCallback(async (event: React.SyntheticEvent) => {
+        event.preventDefault();
+        const searchParams = { email, title, price, description };
         const { items } = await fetchItemsBatch({ searchParams });
         if (items) {
             setCurrentItems(items);
         }
-    };
-
-    const handleSearch = (event: React.SyntheticEvent, { email, price, title, description }: ISearchParams) => {
-        event.preventDefault();
-        console.log({ email, price, title, description })
-        receiveItems({ email, price, title, description });
-    };
-
-    // useEffect(() => {
-    //     receiveItems();
-    // }, []);
+    }, [email, title, price, description]);
 
     return {
         currentItems,
         handleSearch,
+        onChangeEmail,
+        onChangeTitle,
+        onChangePrice,
+        onChangeDescription,
     };
 };
