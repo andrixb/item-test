@@ -7,16 +7,23 @@ export interface GetItemsRequest {
 }
 
 export async function getItems({ searchParams }: GetItemsRequest): Promise<ItemsResponse> {
-    const response = await apiInstance.get<ItemsResponsePayload>(
-        `
-        /api/items?email=${searchParams?.email}&&title=${searchParams?.title}&&description=${searchParams?.description}&&price=${searchParams?.price}
-        `,
-        {}
-    );
+    try {
+        console.log(searchParams);
+        const response = await apiInstance.get<ItemsResponsePayload>(
+            '/api/items?' +
+                `email=${searchParams?.email ?? ''}&&` +
+                `title=${searchParams?.title ?? ''}&&` +
+                `description=${searchParams?.description ?? ''}&&` +
+                `price=${searchParams?.price ?? ''}`,
+            {}
+        );
 
-    if (!response) {
-        return [] as unknown as ItemsResponse;
+        if (!response) {
+            return [] as unknown as ItemsResponse;
+        }
+
+        return adaptItemsResponse(response.data);
+    } catch (error) {
+        throw new Error(`${error}`);
     }
-
-    return adaptItemsResponse(response.data);
 }
