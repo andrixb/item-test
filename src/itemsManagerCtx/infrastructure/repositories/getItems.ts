@@ -8,7 +8,6 @@ export interface GetItemsRequest {
 
 export async function getItems({ searchParams }: GetItemsRequest): Promise<ItemsResponse> {
     try {
-        console.log(searchParams);
         const response = await apiInstance.get<ItemsResponsePayload>(
             '/api/items?' +
                 `email=${searchParams?.email ?? ''}&&` +
