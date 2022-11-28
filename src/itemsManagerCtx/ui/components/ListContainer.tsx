@@ -1,24 +1,29 @@
 import { Typography } from '@mui/material';
 import { Virtuoso } from 'react-virtuoso';
-import { ItemType } from '../../domain/entities';
+import { useItems } from '../../infrastructure/hooks';
+import { itemsReducer } from '../../infrastructure/reducers';
 import { ListItemComponent } from './ListItemComponent';
 
 interface ListContainerProps {
-    currentItems: ItemType[];
+  
 }
 
-export const ListContainer = ({ currentItems }: ListContainerProps) => (
-    <>
-        {!!currentItems && (
-            <Virtuoso
-                useWindowScroll
-                data={currentItems}
-                itemContent={(index, item) => (
-                    <ListItemComponent key={index} title={item.title} image={item.image}>
-                        <Typography variant="body1">{item.description}</Typography>
-                    </ListItemComponent>
-                )}
-            />
-        )}
-    </>
-);
+export const ListContainer = ({  }: ListContainerProps) => {
+    const { state } = useItems();
+
+    return (
+        <>
+            {!!itemsReducer && (
+                <Virtuoso
+                    useWindowScroll
+                    data={state.items}
+                    itemContent={(index, item) => (
+                        <ListItemComponent key={index} title={item.title} image={item.image}>
+                            <Typography variant="body1">{item.description}</Typography>
+                        </ListItemComponent>
+                    )}
+                />
+            )}
+        </>
+    );
+};

@@ -1,2 +1,2 @@
-export * from './useGetItems';
+export * from './useItems';
 export * from './useSortItems';

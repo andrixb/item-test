@@ -1,9 +1,15 @@
-import { useCallback, useState } from 'react';
-import { ItemType } from '../../domain/entities';
+import { useCallback, useContext, useState } from 'react';
 import { fetchItemsBatch } from '../../domain/useCases/fetchItemsBatch';
+import { GET_ITEMS } from '../actions';
+import { ItemContext } from '../contexts';
 
-export const useGetItems = () => {
-    const [currentItems, setCurrentItems] = useState<ItemType[]>([]);
+export const useItems = () => {
+    const context = useContext(ItemContext);
+    if (!context) {
+        throw new Error(`useItems must be used within a ItemsProvider`);
+    }
+    const [state, dispatch] = context;
+
     const [email, setEmail] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -22,13 +28,17 @@ export const useGetItems = () => {
         event.preventDefault();
         const searchParams = { email, title, price, description };
         const { items } = await fetchItemsBatch({ searchParams });
-        if (items) {
-            setCurrentItems(items);
+
+        // add a 'type guard' to avoid TS union type error
+        if (items && typeof dispatch === 'function') {
+            console.log(items)
+            dispatch({ type: GET_ITEMS, payload: { items } });
         }
     }, [email, title, price, description]);
 
     return {
-        currentItems,
+        state,
+        dispatch,
         handleSearch,
         onChangeEmail,
         onChangeTitle,
