@@ -11,41 +11,24 @@ export const useSortItems = () => {
     }
     const [state, dispatch] = context;
 
-    const handleSortByTitle = () => {
-        const { items } = state;
-        const sortedItems = sortByKey<ItemType>(items, 'title');
-        if (typeof dispatch === 'function') {
-            const payload = { items: sortedItems };
-            dispatch({ type: SORT_BY_TITLE, payload });
+    const dispatchSortState = (
+        type: typeof SORT_BY_DESCRIPTION | typeof SORT_BY_EMAIL | typeof SORT_BY_PRICE | typeof SORT_BY_TITLE,
+        key: keyof ItemType
+    ) => {
+        if (typeof state === 'object') {
+            const { items } = state;
+            const sortedItems = sortByKey<ItemType>(items, key);
+            if (typeof dispatch === 'function') {
+                const payload = { items: sortedItems };
+                dispatch({ type, payload });
+            }
         }
     };
 
-    const handleSortByDescription = () => {
-        const { items } = state;
-        const sortedItems = sortByKey<ItemType>(items, 'description');
-        if (typeof dispatch === 'function') {
-            const payload = { items: sortedItems };
-            dispatch({ type: SORT_BY_DESCRIPTION, payload });
-        }
-    };
-
-    const handleSortByEmail = () => {
-        const { items } = state;
-        const sortedItems = sortByKey<ItemType>(items, 'email');
-        if (typeof dispatch === 'function') {
-            const payload = { items: sortedItems };
-            dispatch({ type: SORT_BY_EMAIL, payload });
-        }
-    };
-
-    const handleSortByPrice = () => {
-        const { items } = state;
-        const sortedItems = sortByKey<ItemType>(items, 'price');
-        if (typeof dispatch === 'function') {
-            const payload = { items: sortedItems };
-            dispatch({ type: SORT_BY_PRICE, payload });
-        }
-    };
+    const handleSortByTitle = () => dispatchSortState(SORT_BY_TITLE, 'title');
+    const handleSortByDescription = () => dispatchSortState(SORT_BY_DESCRIPTION, 'description');
+    const handleSortByEmail = () => dispatchSortState(SORT_BY_EMAIL,  'email');
+    const handleSortByPrice = () => dispatchSortState(SORT_BY_PRICE, 'price');
 
     return {
         handleSortByTitle,

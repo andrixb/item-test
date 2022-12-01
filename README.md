@@ -14,7 +14,8 @@ Open [http://localhost:3000/items-manager](http://localhost:3000/items-manager) 
 
 The project uses Next.js and is based on the **hexagonal architecture**: if this application scaled up, new contexts could be created keeping separation of concerns - kind of a plug'n play folder - and avoid repetition of shared app's components.
 
-
 List items view is done through a virtualized list (it uses <https://virtuoso.dev/>)
 
-The API enpoint uses NextJS routing so the external EP is hit through an internal service
+The API endpoint uses NextJS routing so the external EP is hit by an internal EP.
+
+The *price* sort is from the highest to the lowest.

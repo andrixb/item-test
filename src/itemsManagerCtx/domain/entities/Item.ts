@@ -16,9 +16,11 @@ export class Item {
     price?: string;
     email?: string;
     image?: string;
+    isFavorite?: boolean;
 
-    constructor({...params }: IItem) {
+    constructor({ ...params }: IItem) {
         this.id = uuid();
+        this.isFavorite = false;
         Object.assign(this, params);
     }
 }

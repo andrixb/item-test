@@ -1,6 +1,5 @@
 import { ItemType } from '../../domain/entities';
 
-export interface ItemsState {
-    items: ItemType[];
+export interface FavoritesState {
     favorites: ItemType[];
 }

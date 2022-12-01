@@ -2,10 +2,11 @@ import { Box } from '@mui/material';
 import { useItems, useSortItems } from '../infrastructure/hooks';
 import { SearchComponent } from './components';
 import { ListContainer } from './components/ListContainer';
+import { ListFavorites } from './components/ListFavorites';
 import { SortComponent } from './components/SortComponent';
 
 function ItemsManagerPageHome() {
-    const { handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
+    const { items, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
 
     return (
@@ -23,7 +24,8 @@ function ItemsManagerPageHome() {
                     handleSortByEmail={handleSortByEmail}
                     handleSortByPrice={handleSortByPrice}
                 />
-            <ListContainer />
+            <ListContainer items={items} />
+            <ListFavorites />
         </Box>
     );
 }

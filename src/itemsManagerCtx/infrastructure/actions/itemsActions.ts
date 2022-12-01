@@ -5,6 +5,9 @@ export const SORT_BY_TITLE = 'SORT_BY_TITLE';
 export const SORT_BY_DESCRIPTION = 'SORT_BY_DESCRIPTION';
 export const SORT_BY_EMAIL = 'SORT_BY_EMAIL';
 export const SORT_BY_PRICE = 'SORT_BY_PRICE';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const GET_FAVORITES = 'GET_FAVORITES';
 
 export interface GetItemsAction {
     type: typeof GET_ITEMS;
@@ -31,10 +34,28 @@ export interface SortByPriceItemsAction {
     payload: { items: ItemType[] };
 }
 
+export interface GetFavoritesAction {
+    type: typeof GET_FAVORITES;
+    payload: { favorites: ItemType[] };
+}
+
+export interface AddToFavoritesAction {
+    type: typeof ADD_FAVORITE;
+    payload: { favorites: ItemType[] };
+}
+
+export interface RemoveFromFavoritesAction {
+    type: typeof REMOVE_FAVORITE;
+    payload: { favorites: ItemType[] };
+}
+
 export type ItemsActionTypes = 
     | GetItemsAction
     | SortByTitleItemsAction
     | SortByDescriptionItemsAction
     | SortByEmailItemsAction
-    | SortByPriceItemsAction;
+    | SortByPriceItemsAction
+    | GetFavoritesAction
+    | AddToFavoritesAction
+    | RemoveFromFavoritesAction;
     

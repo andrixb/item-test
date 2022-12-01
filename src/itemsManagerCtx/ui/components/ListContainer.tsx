@@ -1,25 +1,41 @@
 import { Typography } from '@mui/material';
 import { Virtuoso } from 'react-virtuoso';
-import { useItems } from '../../infrastructure/hooks';
-import { itemsReducer } from '../../infrastructure/reducers';
+import { useFavorites } from '../../infrastructure/hooks';
+// import { itemsReducer } from '../../infrastructure/reducers';
 import { ListItemComponent } from './ListItemComponent';
+import { ItemType } from '../../domain/entities';
 
 interface ListContainerProps {
-  
+    items: ItemType[];
 }
 
-export const ListContainer = ({  }: ListContainerProps) => {
-    const { items } = useItems();
+export const ListContainer = ({ items }: ListContainerProps) => {
+    const { handleAddToFavs } = useFavorites();
 
     return (
         <>
-            {!!itemsReducer && (
+            {!!items && (
                 <Virtuoso
                     useWindowScroll
                     data={items}
                     itemContent={(index, item) => (
-                        <ListItemComponent key={index} title={item.title} image={item.image}>
-                            <Typography variant="body1">{item.description}</Typography>
+                        <ListItemComponent
+                            key={`list-item-${index}-${item.id}`}
+                            id={item.id}
+                            title={item.title}
+                            image={item.image}
+                            handleAddToFavs={handleAddToFavs}
+                        >
+                            <>
+                                <Typography variant="h4">Description:</Typography>
+                                <Typography variant="body1">{item.description}</Typography>
+                                <br />
+                                <Typography variant="h4">Email:</Typography>
+                                <Typography variant="body1">{item.email}</Typography>
+                                <br />
+                                <Typography variant="h4">Price:</Typography>
+                                <Typography variant="body1">{item.price}</Typography>
+                            </>
                         </ListItemComponent>
                     )}
                 />

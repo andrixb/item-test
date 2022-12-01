@@ -32,10 +32,10 @@ export const useItems = () => {
         if (items && typeof dispatch === 'function') {
             dispatch({ type: GET_ITEMS, payload: { items } });
         }
-    }, []);
+    }, [email, title, description, price]);
 
     return {
-        items: state.items,
+        items: (typeof state === 'object' ? state.items : []),
         handleSearch,
         onChangeEmail,
         onChangeTitle,

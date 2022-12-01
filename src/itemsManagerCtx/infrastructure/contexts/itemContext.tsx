@@ -1,13 +1,21 @@
 import { createContext, Dispatch, useMemo, useReducer } from 'react';
-import { ItemType } from '../../domain/entities';
+import { combineReducers } from '../../../shared/infrastructure/utils/combineReducers';
 import { ItemsActionTypes } from '../actions';
-import { itemsInitialState, itemsReducer } from '../reducers';
+import { ItemsState } from '../interfaces';
+import { itemsReducer, favoritesReducer } from '../reducers';
 
 interface ItemProviderProps {
     children: JSX.Element;
 }
 
-const ItemContext = createContext<(Dispatch<ItemsActionTypes> | { items: ItemType[]; })[] | null>(null);
+export const itemsInitialState: ItemsState = {
+    items: [],
+    favorites: [],
+};
+
+const ItemContext = createContext<(Dispatch<ItemsActionTypes> | ItemsState)[] | null>(null);
+
+// const rootReducer = combineReducers({ itemsReducer, favoritesReducer });
 
 const ItemProvider = ({ children }: ItemProviderProps) => {
     const [state, dispatch] = useReducer(itemsReducer, itemsInitialState);
