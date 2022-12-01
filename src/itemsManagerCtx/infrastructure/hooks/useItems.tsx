@@ -1,5 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { ItemType } from '../../domain/entities';
+import { useCallback, useContext, useState } from 'react';
 import { fetchItemsBatch } from '../../domain/useCases/fetchItemsBatch';
 import { GET_ITEMS } from '../actions';
 import { ItemContext } from '../contexts';
@@ -36,7 +35,7 @@ export const useItems = () => {
     }, []);
 
     return {
-        state,
+        items: state.items,
         handleSearch,
         onChangeEmail,
         onChangeTitle,

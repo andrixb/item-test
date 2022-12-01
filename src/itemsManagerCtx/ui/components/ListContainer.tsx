@@ -9,14 +9,14 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({  }: ListContainerProps) => {
-    const { state } = useItems();
+    const { items } = useItems();
 
     return (
         <>
             {!!itemsReducer && (
                 <Virtuoso
                     useWindowScroll
-                    data={state.items}
+                    data={items}
                     itemContent={(index, item) => (
                         <ListItemComponent key={index} title={item.title} image={item.image}>
                             <Typography variant="body1">{item.description}</Typography>

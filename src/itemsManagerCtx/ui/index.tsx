@@ -5,7 +5,7 @@ import { ListContainer } from './components/ListContainer';
 import { SortComponent } from './components/SortComponent';
 
 function ItemsManagerPageHome() {
-    const { state, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
+    const { handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
 
     return (
