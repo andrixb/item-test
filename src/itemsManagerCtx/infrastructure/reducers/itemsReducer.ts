@@ -7,7 +7,7 @@ export const itemsInitialState: ItemsState = {
 
 export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
     const { type, payload } = action;
-    console.log('GET_ITEMS called');
+    console.log('reducer called');
     switch (type) {
         case GET_ITEMS:
             console.log('GET_ITEMS', action, state);
@@ -17,7 +17,8 @@ export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
             };
 
         default:
-            throw new Error(`Unsupported action type: ${type}`);
-            // return state;
+            // throw new Error(`Unsupported action type: ${type}`);
+            console.log('DEFAULT', action, state);
+            return state;
     }
 };

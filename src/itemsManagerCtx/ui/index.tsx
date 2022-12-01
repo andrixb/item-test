@@ -1,33 +1,30 @@
 import { Box } from '@mui/material';
-import { ItemProvider } from '../infrastructure/contexts';
 import { useItems, useSortItems } from '../infrastructure/hooks';
 import { SearchComponent } from './components';
 import { ListContainer } from './components/ListContainer';
 import { SortComponent } from './components/SortComponent';
 
 function ItemsManagerPageHome() {
-    const { handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
+    const { state, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
     // const {} = useSortItems();
 
     return (
-        <ItemProvider>
-            <Box>
-                <SearchComponent
-                    handleSearch={handleSearch}
-                    onChangeEmail={onChangeEmail}
-                    onChangePrice={onChangePrice}
-                    onChangeTitle={onChangeTitle}
-                    onChangeDescription={onChangeDescription}
-                />
-                {/* <SortComponent
+        <Box>
+            <SearchComponent
+                handleSearch={handleSearch}
+                onChangeEmail={onChangeEmail}
+                onChangePrice={onChangePrice}
+                onChangeTitle={onChangeTitle}
+                onChangeDescription={onChangeDescription}
+            />
+            {/* <SortComponent
                     handleSortByTitle={handleSortByTitle}
                     handleSortByDescription={handleSortByDescription}
                     handleSortByEmail={handleSortByEmail}
                     handleSortByPrice={handleSortByPrice}
                 /> */}
-                <ListContainer />
-            </Box>
-        </ItemProvider>
+            <ListContainer />
+        </Box>
     );
 }
 
