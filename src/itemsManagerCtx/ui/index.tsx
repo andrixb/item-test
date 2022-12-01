@@ -6,7 +6,7 @@ import { SortComponent } from './components/SortComponent';
 
 function ItemsManagerPageHome() {
     const { state, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
-    // const {} = useSortItems();
+    const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
 
     return (
         <Box>
@@ -17,12 +17,12 @@ function ItemsManagerPageHome() {
                 onChangeTitle={onChangeTitle}
                 onChangeDescription={onChangeDescription}
             />
-            {/* <SortComponent
+            <SortComponent
                     handleSortByTitle={handleSortByTitle}
                     handleSortByDescription={handleSortByDescription}
                     handleSortByEmail={handleSortByEmail}
                     handleSortByPrice={handleSortByPrice}
-                /> */}
+                />
             <ListContainer />
         </Box>
     );

@@ -16,8 +16,6 @@ export const useItems = () => {
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<string>('');
 
-    const [itemsList, setItemsList] = useState<ItemType[]>([]);
-
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
         setEmail(e.currentTarget.value);
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
@@ -27,34 +25,18 @@ export const useItems = () => {
     const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
         setDescription(e.currentTarget.value);
 
-    const handleSearch = useCallback(
-        async (event: React.SyntheticEvent) => {
-            event.preventDefault();
-            const searchParams = { email, title, price, description };
-            const { items } = await fetchItemsBatch({ searchParams });
+    const handleSearch = useCallback(async (event: React.SyntheticEvent) => {
+        event.preventDefault();
+        const searchParams = { email, title, price, description };
+        const { items } = await fetchItemsBatch({ searchParams });
 
-            if (items) {
-                setItemsList(items);
-                if (typeof dispatch === 'function') {
-                    console.log('use effect');
-                    dispatch({ type: GET_ITEMS, payload: { items } });
-                }
-            }
-        },
-        []
-    );
-
-    // useEffect(() => {
-    //     // add a 'type guard' to prevent TS union type error
-    //     if (typeof dispatch === 'function') {
-    //         console.log('use effect');
-    //         dispatch({ type: GET_ITEMS, payload: { items: itemsList } });
-    //     }
-    // }, [itemsList]);
+        if (items && typeof dispatch === 'function') {
+            dispatch({ type: GET_ITEMS, payload: { items } });
+        }
+    }, []);
 
     return {
         state,
-        dispatch,
         handleSearch,
         onChangeEmail,
         onChangeTitle,
