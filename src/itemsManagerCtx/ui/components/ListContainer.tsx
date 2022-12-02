@@ -10,7 +10,7 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({ items }: ListContainerProps) => {
-    const { handleAddToFavs } = useFavorites();
+    const { handleFavs } = useFavorites();
 
     return (
         <>
@@ -24,7 +24,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                             id={item.id}
                             title={item.title}
                             image={item.image}
-                            handleAddToFavs={handleAddToFavs}
+                            handleFavs={handleFavs}
                         >
                             <>
                                 <Typography variant="h4">Description:</Typography>

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { ItemType } from '../../domain/entities';
-import { ADD_FAVORITE, REMOVE_FAVORITE } from '../actions';
+import { ADD_FAVORITE, ItemsActionTypes, REMOVE_FAVORITE } from '../actions';
 import { ItemContext } from '../contexts';
 import { ItemsState } from '../interfaces';
 
@@ -14,35 +14,50 @@ export const useFavorites = () => {
     const [state, dispatch] = context;
 
     const findItem = (id: string, itemState: ItemsState) => itemState.items.find((item: ItemType) => item.id === id);
-    const findIndex = (id: string, itemsState: ItemsState) =>
-        itemsState.favorites.findIndex((favorite: ItemType) => favorite.id === id);
+    const findFavorites = (id: string, itemState: ItemsState) =>
+        itemState.favorites.find((item: ItemType) => item.id === id);
+    const removedItems = (id: string, itemState: ItemsState) =>
+        itemState.items.filter((item: ItemType) => item.id !== id);
 
-    const handleAddToFavs = (e: React.SyntheticEvent) => {
-        const itemId = e.currentTarget.id ? e.currentTarget.id : '';
+    const handleFavs = useCallback(
+        (e: React.SyntheticEvent) => {
+            const itemId = e.currentTarget.id ? e.currentTarget.id : '';
+            if (typeof state === 'object' && typeof dispatch === 'function') {
+                const existsInFavs = findFavorites(itemId, state);
 
-        if (typeof state === 'object' && typeof dispatch === 'function') {
-            const foundItem = findItem(itemId, state);
+                if (!existsInFavs) {
+                    const itemToAdd = findItem(itemId, state);
+                    if (itemToAdd) {
+                        addToFavs(itemToAdd, state, dispatch);
+                    }
+                }
 
-            if (foundItem && foundItem.isFavorite === false) {
-                foundItem.isFavorite = true;
-                const payload = { favorites: [...state.favorites, foundItem] };
-                dispatch({ type: ADD_FAVORITE, payload });
-                return;
+                if (existsInFavs) {
+                    removeFromFavs(itemId, state, dispatch);
+                }
             }
+        },
+        [state]
+    );
 
-            // if isFavorite element already exists in the list.
-            if (foundItem && foundItem.isFavorite === true) {
-                const index = findIndex(itemId, state);
-                foundItem.isFavorite = false;
-                const payload = { favorites: [...state.favorites.splice(index, 1)] };
-                dispatch({ type: REMOVE_FAVORITE, payload });
-                return;
-            }
+    const addToFavs = (itemToAdd: ItemType, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
+        // add useCase to connect to api for persistent storing
+        const payload = { favorites: [...itemsState.favorites, itemToAdd] };
+        dispatch({ type: ADD_FAVORITE, payload });
+    };
+
+    const removeFromFavs = (itemId: string, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
+        const cleanedFavorites = removedItems(itemId, itemsState);
+
+        if (cleanedFavorites) {
+            // add useCase to connect to api for persistent storing
+            const payload = { favorites: cleanedFavorites };
+            dispatch({ type: REMOVE_FAVORITE, payload });
         }
     };
 
     return {
         favorites: typeof state === 'object' ? state.favorites : [],
-        handleAddToFavs,
+        handleFavs,
     };
 };
