@@ -1,6 +1,6 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { ItemType } from '../../domain/entities';
-import { ADD_FAVORITE, ItemsActionTypes, REMOVE_FAVORITE } from '../actions';
+import { ADD_FAVORITE, GET_FAVORITES, ItemsActionTypes, REMOVE_FAVORITE } from '../actions';
 import { ItemContext } from '../contexts';
 import { ItemsState } from '../interfaces';
 
@@ -19,7 +19,9 @@ export const useFavorites = () => {
     const removedItems = (id: string, itemState: ItemsState) =>
         itemState.items.filter((item: ItemType) => item.id !== id);
 
-    const handleFavs = useCallback(
+    useEffect(() => getFavorites(), [state]);
+
+    const handleFavorites = useCallback(
         (e: React.SyntheticEvent) => {
             const itemId = e.currentTarget.id ? e.currentTarget.id : '';
             if (typeof state === 'object' && typeof dispatch === 'function') {
@@ -28,28 +30,36 @@ export const useFavorites = () => {
                 if (!existsInFavs) {
                     const itemToAdd = findItem(itemId, state);
                     if (itemToAdd) {
-                        addToFavs(itemToAdd, state, dispatch);
+                        addToFavorites(itemToAdd, state, dispatch);
                     }
                 }
 
                 if (existsInFavs) {
-                    removeFromFavs(itemId, state, dispatch);
+                    removeFromFavorites(itemId, state, dispatch);
                 }
             }
         },
         [state]
     );
 
-    const addToFavs = (itemToAdd: ItemType, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
+    const addToFavorites = (
+        itemToAdd: ItemType,
+        itemsState: ItemsState,
+        dispatch: (value: ItemsActionTypes) => void
+    ) => {
         const payload = { favorites: [...itemsState.favorites, itemToAdd] };
-        
+
         // here should be available an EP for storing favorites
         localStorage.setItem('items', JSON.stringify(payload));
-        
+
         dispatch({ type: ADD_FAVORITE, payload });
     };
 
-    const removeFromFavs = (itemId: string, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
+    const removeFromFavorites = (
+        itemId: string,
+        itemsState: ItemsState,
+        dispatch: (value: ItemsActionTypes) => void
+    ) => {
         const cleanedFavorites = removedItems(itemId, itemsState);
 
         if (cleanedFavorites) {
@@ -62,8 +72,18 @@ export const useFavorites = () => {
         }
     };
 
+    const getFavorites = () => {
+        const storeFavorites = localStorage.getItem('items');
+
+        if (storeFavorites && typeof dispatch === 'function') {
+            const payload = JSON.parse(storeFavorites);
+            dispatch({ type: GET_FAVORITES, payload });
+        }
+    };
+
     return {
         favorites: typeof state === 'object' ? state.favorites : [],
-        handleFavs,
+        handleFavorites,
+        getFavorites,
     };
 };

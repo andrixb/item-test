@@ -5,11 +5,11 @@ interface ListItemComponentProps {
     title?: string;
     image?: string;
     id: string;
-    handleFavs: (e: React.SyntheticEvent) => void;
+    handleFavorites: (e: React.SyntheticEvent) => void;
     children?: JSX.Element;
 }
 
-export const ListItemComponent = ({ title, image, id, children, handleFavs }: ListItemComponentProps) => (
+export const ListItemComponent = ({ title, image, id, children, handleFavorites }: ListItemComponentProps) => (
     <ListItem component="div" style={{ padding: '1rem 0.5rem' }} key={`item-${id}`}>
         <Card sx={{ maxWidth: '100%' }}>
             <CardHeader title={title} />
@@ -19,7 +19,7 @@ export const ListItemComponent = ({ title, image, id, children, handleFavs }: Li
                 <IconButton
                     aria-label="add to favorites"
                     id={id}
-                    onClick={handleFavs}
+                    onClick={handleFavorites}
                 >
                     <FavoriteIcon />
                 </IconButton>

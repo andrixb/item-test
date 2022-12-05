@@ -1,7 +1,6 @@
 import { Typography } from '@mui/material';
 import { Virtuoso } from 'react-virtuoso';
 import { useFavorites } from '../../infrastructure/hooks';
-// import { itemsReducer } from '../../infrastructure/reducers';
 import { ListItemComponent } from './ListItemComponent';
 import { ItemType } from '../../domain/entities';
 
@@ -10,7 +9,7 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({ items }: ListContainerProps) => {
-    const { handleFavs } = useFavorites();
+    const { handleFavorites } = useFavorites();
 
     return (
         <>
@@ -24,7 +23,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                             id={item.id}
                             title={item.title}
                             image={item.image}
-                            handleFavs={handleFavs}
+                            handleFavorites={handleFavorites}
                         >
                             <>
                                 <Typography variant="h4">Description:</Typography>
@@ -40,6 +39,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                     )}
                 />
             )}
+            {!items && (<><Typography>There are no items to show</Typography></>)}
         </>
     );
 };
