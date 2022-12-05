@@ -45,13 +45,11 @@ export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
                 favorites: payload.favorites,
             };
         case ADD_FAVORITE:
-            console.log('ADD');
             return {
                 ...state,
                 favorites: payload.favorites,
             };
         case REMOVE_FAVORITE:
-            console.log('REMVe');
             return {
                 ...state,
                 favorites: payload.favorites,

@@ -41,8 +41,11 @@ export const useFavorites = () => {
     );
 
     const addToFavs = (itemToAdd: ItemType, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
-        // add useCase to connect to api for persistent storing
         const payload = { favorites: [...itemsState.favorites, itemToAdd] };
+        
+        // here should be available an EP for storing favorites
+        localStorage.setItem('items', JSON.stringify(payload));
+        
         dispatch({ type: ADD_FAVORITE, payload });
     };
 
@@ -50,8 +53,11 @@ export const useFavorites = () => {
         const cleanedFavorites = removedItems(itemId, itemsState);
 
         if (cleanedFavorites) {
-            // add useCase to connect to api for persistent storing
             const payload = { favorites: cleanedFavorites };
+
+            // here should be available an EP for storing favorites
+            localStorage.setItem('items', JSON.stringify(payload));
+
             dispatch({ type: REMOVE_FAVORITE, payload });
         }
     };
