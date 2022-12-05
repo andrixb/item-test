@@ -8,6 +8,8 @@ npm run dev
 yarn dev
 ```
 
+Run `docker compose up` to lift up redis cache container.
+
 Open [http://localhost:3000/items-manager](http://localhost:3000/items-manager) with your browser to see the result.
 
 ## App features
