@@ -19,7 +19,9 @@ export const SortComponent = ({
     return (
         <>
             <Box component="div" className={classes.root}>
-                <Typography variant="body1" className={classes.sortWrapper}>Sort by: </Typography>
+                <Typography variant="body1" className={classes.sortWrapper}>
+                    Sort by:{' '}
+                </Typography>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Chip label="Title" variant="outlined" onClick={handleSortByTitle} />
                     <Chip label="Email" variant="outlined" onClick={handleSortByEmail} />

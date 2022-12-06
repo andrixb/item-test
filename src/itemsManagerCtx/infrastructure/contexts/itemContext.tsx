@@ -17,7 +17,7 @@ const ItemContext = createContext<(Dispatch<ItemsActionTypes> | ItemsState)[] | 
 const ItemProvider = ({ children }: ItemProviderProps) => {
     const [state, dispatch] = useReducer(itemsReducer, itemsInitialState);
     const store = useMemo(() => [state, dispatch], [state]);
-    return <ItemContext.Provider value={store}>{children}</ItemContext.Provider >;
+    return <ItemContext.Provider value={store}>{children}</ItemContext.Provider>;
 };
 
 export { ItemContext, ItemProvider };

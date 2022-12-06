@@ -30,5 +30,5 @@ export const useItemsManagerPageHomeStyles = makeStyles((theme: ItemsManagerPage
         padding: 16,
         border: `2px solid ${darkMediumBlue}`,
         borderRadius: `0 0 5px 5px`,
-    }
+    },
 }));

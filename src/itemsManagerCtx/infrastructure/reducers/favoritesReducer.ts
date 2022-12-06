@@ -1,11 +1,5 @@
-import {
-    ADD_FAVORITE,
-    GET_FAVORITES,
-    REMOVE_FAVORITE,
-    ItemsActionTypes,
-} from '../actions';
+import { ADD_FAVORITE, GET_FAVORITES, REMOVE_FAVORITE, ItemsActionTypes } from '../actions';
 import { ItemsState } from '../interfaces';
-
 
 export const favoritesReducer = (state: ItemsState, action: ItemsActionTypes) => {
     const { type, payload } = action;

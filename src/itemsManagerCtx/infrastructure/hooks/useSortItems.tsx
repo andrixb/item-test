@@ -27,7 +27,7 @@ export const useSortItems = () => {
 
     const handleSortByTitle = () => dispatchSortState(SORT_BY_TITLE, 'title');
     const handleSortByDescription = () => dispatchSortState(SORT_BY_DESCRIPTION, 'description');
-    const handleSortByEmail = () => dispatchSortState(SORT_BY_EMAIL,  'email');
+    const handleSortByEmail = () => dispatchSortState(SORT_BY_EMAIL, 'email');
     const handleSortByPrice = () => dispatchSortState(SORT_BY_PRICE, 'price');
 
     return {

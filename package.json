@@ -26,7 +26,7 @@
         "cypress:headless": "cypress run",
         "e2e": "start-server-and-test start http://localhost:3000 cypress",
         "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless",
-        "prettier": "prettier --config ../.prettierrc --write 'src/**/*.{ts,tsx}'"
+        "prettier": "prettier --config ./.prettierrc --write 'src/**/*.{ts,tsx}'"
     },
     "dependencies": {
         "@emotion/react": "^11.10.5",

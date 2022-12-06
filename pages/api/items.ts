@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const response = await axios.get<ItemsExternalResponsePayload>(`${PUBLIC_API}/items.json`);
 
             /** We'd need to get a response with ids.
-             *  For now we adapt the received data and with add ids.
+             *  For now we adapt the received data by adding ids.
              *  Here we'd need to implement a cache (or have a DB) to get data consistent and persistent */
             const adaptedList = adaptList(response.data);
             const data = filterItems({ email, title, description, price }, adaptedList);

@@ -12,12 +12,12 @@ export const useSortComponentStyles = makeStyles((theme: SortComponentStylesThem
     root: {
         width: '100%',
         display: 'flex',
-        flexFlow:'row',
+        flexFlow: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
     sortWrapper: {
         marginRight: 4,
         textTransform: 'uppercase',
-    }
+    },
 }));

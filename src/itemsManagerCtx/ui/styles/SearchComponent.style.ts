@@ -14,7 +14,7 @@ export const useSearchComponentStyles = makeStyles((theme: SearchComponentStyles
         width: '100%',
         background: white,
         padding: 8,
-        borderRadius: 5
+        borderRadius: 5,
     },
 
     formContainer: {},
@@ -41,5 +41,5 @@ export const useSearchComponentStyles = makeStyles((theme: SearchComponentStyles
 
     buttonElement: {
         width: '100%',
-    }
+    },
 }));

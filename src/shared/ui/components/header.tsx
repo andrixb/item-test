@@ -5,10 +5,10 @@ export interface MainAppHeaderComponentProps {
     title?: string;
     description?: string;
     favico?: string;
-};
+}
 
 export function MainAppHeaderComponent(props: MainAppHeaderComponentProps) {
-    const { title, description, favico } = {...props};
+    const { title, description, favico } = { ...props };
     return (
         <Head>
             <title>{title}</title>
@@ -17,4 +17,3 @@ export function MainAppHeaderComponent(props: MainAppHeaderComponentProps) {
         </Head>
     );
 }
-

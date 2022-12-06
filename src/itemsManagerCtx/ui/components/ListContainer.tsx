@@ -39,7 +39,11 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                     )}
                 />
             )}
-            {!items && (<><Typography>There are no items to show</Typography></>)}
+            {!items && (
+                <>
+                    <Typography>There are no items to show</Typography>
+                </>
+            )}
         </>
     );
 };

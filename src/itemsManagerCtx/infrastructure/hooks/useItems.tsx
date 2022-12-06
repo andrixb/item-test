@@ -24,18 +24,21 @@ export const useItems = () => {
     const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
         setDescription(e.currentTarget.value);
 
-    const handleSearch = useCallback(async (event: React.SyntheticEvent) => {
-        event.preventDefault();
-        const searchParams = { email, title, price, description };
-        const { items } = await fetchItemsBatch({ searchParams });
+    const handleSearch = useCallback(
+        async (event: React.SyntheticEvent) => {
+            event.preventDefault();
+            const searchParams = { email, title, price, description };
+            const { items } = await fetchItemsBatch({ searchParams });
 
-        if (items && typeof dispatch === 'function') {
-            dispatch({ type: GET_ITEMS, payload: { items } });
-        }
-    }, [email, title, description, price]);
+            if (items && typeof dispatch === 'function') {
+                dispatch({ type: GET_ITEMS, payload: { items } });
+            }
+        },
+        [email, title, description, price]
+    );
 
     return {
-        items: (typeof state === 'object' ? state.items : []),
+        items: typeof state === 'object' ? state.items : [],
         handleSearch,
         onChangeEmail,
         onChangeTitle,

@@ -1,4 +1,4 @@
-import { ItemType } from "../../domain/entities";
+import { ItemType } from '../../domain/entities';
 
 export const GET_ITEMS = 'GET_ITEMS';
 export const SORT_BY_TITLE = 'SORT_BY_TITLE';
@@ -49,7 +49,7 @@ export interface RemoveFromFavoritesAction {
     payload: { favorites: ItemType[] };
 }
 
-export type ItemsActionTypes = 
+export type ItemsActionTypes =
     | GetItemsAction
     | SortByTitleItemsAction
     | SortByDescriptionItemsAction
@@ -58,4 +58,3 @@ export type ItemsActionTypes =
     | GetFavoritesAction
     | AddToFavoritesAction
     | RemoveFromFavoritesAction;
-    

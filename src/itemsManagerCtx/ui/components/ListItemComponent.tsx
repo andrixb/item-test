@@ -16,11 +16,7 @@ export const ListItemComponent = ({ title, image, id, children, handleFavorites 
             <CardMedia component="img" height="auto" image={image} alt={title} />
             <CardContent>{children}</CardContent>
             <CardActions disableSpacing>
-                <IconButton
-                    aria-label="add to favorites"
-                    id={id}
-                    onClick={handleFavorites}
-                >
+                <IconButton aria-label="add to favorites" id={id} onClick={handleFavorites}>
                     <FavoriteIcon />
                 </IconButton>
             </CardActions>
