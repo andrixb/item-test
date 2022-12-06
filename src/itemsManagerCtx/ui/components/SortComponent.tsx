@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import { Breadcrumbs, Chip, Typography } from '@mui/material';
+import { useSortComponentStyles } from '../styles';
 
 interface SortComponentProps {
     handleSortByTitle: (e: React.SyntheticEvent) => void;
@@ -14,10 +15,11 @@ export const SortComponent = ({
     handleSortByEmail,
     handleSortByPrice,
 }: SortComponentProps) => {
+    const classes = useSortComponentStyles();
     return (
         <>
-            <Box component="div">
-                <Typography variant="body1">Sort by: </Typography>
+            <Box component="div" className={classes.root}>
+                <Typography variant="body1" className={classes.sortWrapper}>Sort by: </Typography>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Chip label="Title" variant="outlined" onClick={handleSortByTitle} />
                     <Chip label="Email" variant="outlined" onClick={handleSortByEmail} />

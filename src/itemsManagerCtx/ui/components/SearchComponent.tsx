@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { useSearchComponentStyles } from '../styles/SearchComponent.style';
+import { useSearchComponentStyles } from '../styles';
 
 interface SearchComponentProps {
     handleSearch: (event: React.SyntheticEvent) => void;
@@ -19,8 +19,8 @@ export const SearchComponent = ({
 }: SearchComponentProps) => {
     const classes = useSearchComponentStyles();
     return (
-        <Box component="div">
-            <Box component="form" autoComplete="off" onSubmit={handleSearch} className={classes.root}>
+        <Box component="div" className={classes.root}>
+            <Box component="form" autoComplete="off" onSubmit={handleSearch} className={classes.formContainer}>
                 <Box component="div" className={classes.fieldsWrapper}>
                     <TextField
                         name="title"
@@ -48,14 +48,14 @@ export const SearchComponent = ({
                     <TextField
                         id="email-search"
                         name="email"
-                        label="email"
+                        label="Email"
                         variant="outlined"
                         onChange={onChangeEmail}
                         className={classes.inputField}
                     />
                 </Box>
                 <Box component="div" className={classes.buttonWrapper}>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit" variant="contained" className={classes.buttonElement}>
                         Search
                     </Button>
                 </Box>
