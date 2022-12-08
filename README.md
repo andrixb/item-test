@@ -23,5 +23,5 @@ The *price* sort is from the highest to the lowest.
 ### Warning
 
 The *favorites* won't be a consistent list since no ids are returned by the external EP.
-They're store in the localStorage - which has got it's 5MB limit. Ideally an EP should store them up by contacting a DB, and serve them back when required.
-Even adding them up through the current internal service won't add a great benefits since they will be calculated anytime a new search is done, so they will be consistent only till a new search is done.
+They're stored in the localStorage - which has got it's 5MB limit. Ideally an EP should store them up by contacting a DB, and serve them back when required.
+Even adding them up through the current internal service won't add a great benefits since they will be calculated anytime a new search is done, so they will be consistent only till a new search is done. This will affect the favorites icon color any time a new search is done.

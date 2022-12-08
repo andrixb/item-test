@@ -38,11 +38,11 @@ export const useFavorites = () => {
 
     const findItem = (id: string, itemState: ItemsState) => itemState.items.find((item: ItemType) => item.id === id);
     const findFavorites = (id: string, itemState: ItemsState) =>
-        itemState.favorites.find((item: ItemType) => item.id === id);
+        itemState.favorites?.find((item: ItemType) => item.id === id);
     const removedFavorites = (id: string, itemState: ItemsState) =>
-        itemState.favorites.filter((item: ItemType) => item.id !== id);
+        itemState.favorites?.filter((item: ItemType) => item.id !== id);
     const updateItemsList = (updatedItem: ItemType, itemsState: ItemsState) => {
-        const index = itemsState.items.indexOf(updatedItem);
+        const index = itemsState.items?.indexOf(updatedItem);
         itemsState.items[index] = updatedItem;
         return itemsState;
     };
@@ -64,14 +64,19 @@ export const useFavorites = () => {
         (itemId: string, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
             const cleanedFavorites = removedFavorites(itemId, itemsState);
             const itemToRemove = findItem(itemId, itemsState);
-            if (cleanedFavorites && itemToRemove) {
+
+            if (itemToRemove) {
                 itemToRemove.isFavorite = false;
-                const payload = { favorites: cleanedFavorites };
                 const updatedItemsList = updateItemsList(itemToRemove, itemsState);
+                const payload = { items: updatedItemsList.items };
+                dispatch({ type: UPDATE_ITEMS_FAVORITES, payload });
+            }
+
+            if (cleanedFavorites) {         
+                const payload = { favorites: cleanedFavorites };   
                 // here should be available an EP for storing favorites
                 localStorage.setItem('favorites', JSON.stringify(payload));
                 dispatch({ type: REMOVE_FAVORITE, payload });
-                dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList.items } });
             }
         },
         []

@@ -12,7 +12,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
 
     return (
         <>
-            {!!items &&
+            {!!items && items.length > 0 && 
                 items.map((item: ItemType, index: number) => (
                     <ListItemComponent
                         key={`list-item-${index}-${item.id}`}
@@ -36,7 +36,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                 ))}
             {!items && (
                 <>
-                    <Typography>There are no items to show</Typography>
+                    <Typography>There are no items to be shown</Typography>
                 </>
             )}
         </>

@@ -36,7 +36,7 @@ export const FavoritesModal = ({
                     <Divider />
                 </Box>
 
-                {favorites?.length === 0 && (
+                {!!favorites && favorites.length === 0 && (
                     <Box component="div">
                         <Typography variant="h3">No Favorites</Typography>
                     </Box>
@@ -45,14 +45,18 @@ export const FavoritesModal = ({
                 {!!favorites && (
                     <>
                         <Box component="div" className={classes.clearSearchBtn}>
-                            <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
-                            <Button
-                                className={classes.clearSearchBtn}
-                                variant="text"
-                                onClick={handleClearSearchFavorites}
-                            >
-                                Clear search
-                            </Button>
+                            {favorites.length === 0 && (
+                                <>
+                                    <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
+                                    <Button
+                                        className={classes.clearSearchBtn}
+                                        variant="text"
+                                        onClick={handleClearSearchFavorites}
+                                    >
+                                        Clear search
+                                    </Button>
+                                </>
+                            )}
                         </Box>
                         <ListContainer items={favorites} />
                     </>
