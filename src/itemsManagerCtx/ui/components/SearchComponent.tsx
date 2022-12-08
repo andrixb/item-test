@@ -22,37 +22,45 @@ export const SearchComponent = ({
         <Box component="div" className={classes.root}>
             <Box component="form" autoComplete="off" onSubmit={handleSearch} className={classes.formContainer}>
                 <Box component="div" className={classes.fieldsWrapper}>
-                    {!!onChangeTitle && <TextField
-                        name="title"
-                        variant="outlined"
-                        label="Title"
-                        onChange={onChangeTitle}
-                        className={classes.inputField}
-                    />}
-                    {!!onChangeDescription && <TextField
-                        id="description-search"
-                        name="description"
-                        variant="outlined"
-                        label="Description"
-                        className={classes.inputField}
-                        onChange={onChangeDescription}
-                    />}
-                    {!!onChangePrice && <TextField
-                        id="price-search"
-                        name="price"
-                        label="Price"
-                        variant="outlined"
-                        onChange={onChangePrice}
-                        className={classes.inputField}
-                    />}
-                    {!!onChangeEmail && <TextField
-                        id="email-search"
-                        name="email"
-                        label="Email"
-                        variant="outlined"
-                        onChange={onChangeEmail}
-                        className={classes.inputField}
-                    />}
+                    {!!onChangeTitle && (
+                        <TextField
+                            name="title"
+                            variant="outlined"
+                            label="Title"
+                            onChange={onChangeTitle}
+                            className={classes.inputField}
+                        />
+                    )}
+                    {!!onChangeDescription && (
+                        <TextField
+                            id="description-search"
+                            name="description"
+                            variant="outlined"
+                            label="Description"
+                            className={classes.inputField}
+                            onChange={onChangeDescription}
+                        />
+                    )}
+                    {!!onChangePrice && (
+                        <TextField
+                            id="price-search"
+                            name="price"
+                            label="Price"
+                            variant="outlined"
+                            onChange={onChangePrice}
+                            className={classes.inputField}
+                        />
+                    )}
+                    {!!onChangeEmail && (
+                        <TextField
+                            id="email-search"
+                            name="email"
+                            label="Email"
+                            variant="outlined"
+                            onChange={onChangeEmail}
+                            className={classes.inputField}
+                        />
+                    )}
                 </Box>
                 <Box component="div" className={classes.buttonWrapper}>
                     <Button type="submit" variant="contained" className={classes.buttonElement}>

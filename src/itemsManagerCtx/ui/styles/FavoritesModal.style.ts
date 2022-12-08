@@ -24,7 +24,7 @@ export const useFavoritesModalStyles = makeStyles((theme: FavoriteModalStylesThe
     },
 
     headerContainer: {
-       margin: 8,
+        margin: 8,
     },
 
     clearSearchBtn: {
