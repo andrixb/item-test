@@ -1,22 +1,46 @@
 import { Typography } from '@mui/material';
-import { Virtuoso } from 'react-virtuoso';
-import { useGetItems } from '../../infrastructure/hooks';
+import { useFavorites } from '../../infrastructure/hooks';
 import { ListItemComponent } from './ListItemComponent';
+import { ItemType } from '../../domain/entities';
 
-export const ListContainer = () => {
-    const { currentItems } = useGetItems();
+interface ListContainerProps {
+    items: ItemType[];
+}
+
+export const ListContainer = ({ items }: ListContainerProps) => {
+    const { handleFavorites } = useFavorites();
 
     return (
-        !!currentItems && (
-            <Virtuoso
-                useWindowScroll
-                data={currentItems}
-                itemContent={(index, item) => (
-                    <ListItemComponent key={index} title={item.title} image={item.image}>
-                        <Typography variant="body1">{item.description}</Typography>
+        <>
+            {!!items &&
+                items.length > 0 &&
+                items.map((item: ItemType, index: number) => (
+                    <ListItemComponent
+                        key={`list-item-${index}-${item.id}`}
+                        id={item.id}
+                        title={item.title}
+                        image={item.image}
+                        isFavorite={item.isFavorite}
+                        handleFavorites={handleFavorites}
+                        data-test="list-item"
+                    >
+                        <>
+                            <Typography variant="h4">Description:</Typography>
+                            <Typography variant="body1">{item.description}</Typography>
+                            <br />
+                            <Typography variant="h4">Email:</Typography>
+                            <Typography variant="body1">{item.email}</Typography>
+                            <br />
+                            <Typography variant="h4">Price:</Typography>
+                            <Typography variant="body1">{item.price}</Typography>
+                        </>
                     </ListItemComponent>
-                )}
-            />
-        )
+                ))}
+            {!items && (
+                <>
+                    <Typography>There are no items to be shown</Typography>
+                </>
+            )}
+        </>
     );
 };

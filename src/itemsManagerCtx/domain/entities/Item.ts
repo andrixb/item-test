@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { Properties } from '../../../shared/infrastructure/types/FunctionPropertiesType';
 
 export interface IItem {
@@ -16,9 +16,11 @@ export class Item {
     price?: string;
     email?: string;
     image?: string;
+    isFavorite?: boolean;
 
-    constructor({...params }: IItem) {
+    constructor({ ...params }: IItem) {
         this.id = uuid();
+        this.isFavorite = false;
         Object.assign(this, params);
     }
 }
