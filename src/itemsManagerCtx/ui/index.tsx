@@ -25,7 +25,7 @@ function ItemsManagerPageHome() {
             />
             <Box>
                 <Box>
-                    <AppBar position="static" className={classes.appBar}>
+                    <AppBar position="fixed" className={classes.appBar}>
                         <Toolbar>
                             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                                 Items Manager
@@ -47,16 +47,20 @@ function ItemsManagerPageHome() {
                                 onChangeDescription={onChangeDescription}
                             />
                         </Toolbar>
+                        {items.length > 0 && (
+                            <Toolbar>
+                                <SortComponent
+                                    handleSortByTitle={handleSortByTitle}
+                                    handleSortByDescription={handleSortByDescription}
+                                    handleSortByEmail={handleSortByEmail}
+                                    handleSortByPrice={handleSortByPrice}
+                                />{' '}
+                            </Toolbar>
+                        )}
                     </AppBar>
                 </Box>
                 {items.length > 0 && (
                     <Box className={classes.searchResultsContainer}>
-                        <SortComponent
-                            handleSortByTitle={handleSortByTitle}
-                            handleSortByDescription={handleSortByDescription}
-                            handleSortByEmail={handleSortByEmail}
-                            handleSortByPrice={handleSortByPrice}
-                        />
                         <ListContainerVirtualised items={items} />
                     </Box>
                 )}

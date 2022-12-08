@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles';
+import { white } from '../../../shared/ui/styles/colors';
 
 interface SortComponentStylesTheme {
     mixins: any;
@@ -23,5 +24,8 @@ export const useSortComponentStyles = makeStyles((theme: SortComponentStylesThem
     sortWrapper: {
         marginRight: 4,
         textTransform: 'uppercase',
+    },
+    labelWrapper: {
+        color: white,
     },
 }));

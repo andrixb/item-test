@@ -31,10 +31,11 @@ export const FavoritesModal = ({
             aria-describedby="modal-modal-description"
         >
             <Box className={classes.root}>
-                <Typography variant="h2">Your Favorites</Typography>
-                <Divider />
-                <br />
-                
+                <Box component="div" className={classes.headerContainer}>
+                    <Typography variant="h2">Your Favorites</Typography>
+                    <Divider />
+                </Box>
+
                 {favorites?.length === 0 && (
                     <Box component="div">
                         <Typography variant="h3">No Favorites</Typography>

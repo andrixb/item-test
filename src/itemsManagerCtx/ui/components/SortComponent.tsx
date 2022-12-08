@@ -20,13 +20,33 @@ export const SortComponent = ({
         <>
             <Box component="div" className={classes.root}>
                 <Typography variant="body1" className={classes.sortWrapper}>
-                    Sort by:{' '}
+                    Sort by
                 </Typography>
                 <Breadcrumbs aria-label="breadcrumb">
-                    <Chip label="Title" variant="outlined" onClick={handleSortByTitle} />
-                    <Chip label="Email" variant="outlined" onClick={handleSortByEmail} />
-                    <Chip label="Price" variant="outlined" onClick={handleSortByPrice} />
-                    <Chip label="Description" variant="outlined" onClick={handleSortByDescription} />
+                    <Chip
+                        className={classes.labelWrapper}
+                        label="Title"
+                        variant="outlined"
+                        onClick={handleSortByTitle}
+                    />
+                    <Chip
+                        className={classes.labelWrapper}
+                        label="Email"
+                        variant="outlined"
+                        onClick={handleSortByEmail}
+                    />
+                    <Chip
+                        className={classes.labelWrapper}
+                        label="Price"
+                        variant="outlined"
+                        onClick={handleSortByPrice}
+                    />
+                    <Chip
+                        className={classes.labelWrapper}
+                        label="Description"
+                        variant="outlined"
+                        onClick={handleSortByDescription}
+                    />
                 </Breadcrumbs>
             </Box>
         </>

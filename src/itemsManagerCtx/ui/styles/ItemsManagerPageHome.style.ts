@@ -13,7 +13,6 @@ export const useItemsManagerPageHomeStyles = makeStyles((theme: ItemsManagerPage
     appBar: {
         width: '100%',
         paddingBottom: 8,
-        borderRadius: `5px 5px 0 0`,
     },
     subBar: {
         display: 'flex',
@@ -28,7 +27,9 @@ export const useItemsManagerPageHomeStyles = makeStyles((theme: ItemsManagerPage
     },
     searchResultsContainer: {
         padding: 16,
-        border: `2px solid ${darkMediumBlue}`,
-        borderRadius: `0 0 5px 5px`,
+        marginTop: 400,
+        [theme.breakpoints.up('md')]: {
+            marginTop: 250,
+        },
     },
 }));
