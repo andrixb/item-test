@@ -72,8 +72,8 @@ export const useFavorites = () => {
                 dispatch({ type: UPDATE_ITEMS_FAVORITES, payload });
             }
 
-            if (cleanedFavorites) {         
-                const payload = { favorites: cleanedFavorites };   
+            if (cleanedFavorites) {
+                const payload = { favorites: cleanedFavorites };
                 // here should be available an EP for storing favorites
                 localStorage.setItem('favorites', JSON.stringify(payload));
                 dispatch({ type: REMOVE_FAVORITE, payload });
@@ -85,7 +85,7 @@ export const useFavorites = () => {
     const getFavorites = useCallback(() => {
         const storeFavorites = localStorage.getItem('favorites');
         if (storeFavorites && typeof dispatch === 'function') {
-            const payload = {favorites: JSON.parse(storeFavorites)};
+            const payload = { favorites: JSON.parse(storeFavorites) };
             dispatch({ type: GET_FAVORITES, payload });
         }
     }, [dispatch]);

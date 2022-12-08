@@ -25,7 +25,12 @@ export const ListItemComponent = ({
             {!!image && <CardMedia component="img" height="auto" image={image} alt={title} />}
             {!!children && <CardContent>{children}</CardContent>}
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" id={id} onClick={handleFavorites} data-test="add-to-favorites">
+                <IconButton
+                    aria-label="add to favorites"
+                    id={id}
+                    onClick={handleFavorites}
+                    data-test="add-to-favorites"
+                >
                     <FavoriteIcon sx={isFavorite ? { color: lightRed } : { color: darkMediumGrey }} />
                 </IconButton>
             </CardActions>

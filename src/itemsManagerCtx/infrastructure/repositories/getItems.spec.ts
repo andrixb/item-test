@@ -9,7 +9,7 @@ const axiosMock = axios as jest.Mocked<typeof axios>;
 
 describe('Get Items Repository', () => {
     const requestItemsData: GetItemsRequest = {
-        searchParams: {}
+        searchParams: {},
     };
 
     beforeEach(() => {
@@ -28,7 +28,7 @@ describe('Get Items Repository', () => {
 
     it('should not return a list of items', async () => {
         const errorResponseData = {
-            data: undefined
+            data: undefined,
         };
         axiosMock.get.mockRejectedValue('Error');
         axiosMock.get.mockResolvedValue({

@@ -12,7 +12,8 @@ export const ListContainer = ({ items }: ListContainerProps) => {
 
     return (
         <>
-            {!!items && items.length > 0 && 
+            {!!items &&
+                items.length > 0 &&
                 items.map((item: ItemType, index: number) => (
                     <ListItemComponent
                         key={`list-item-${index}-${item.id}`}
