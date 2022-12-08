@@ -9,6 +9,7 @@ export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const GET_FAVORITES = 'GET_FAVORITES';
 export const UPDATE_ITEMS_FAVORITES = 'UPDATE_ITEMS_FAVORITES';
+export const SEARCH_FAVORITES = 'SEARCH_FAVORITES';
 
 export interface GetItemsAction {
     type: typeof GET_ITEMS;
@@ -55,6 +56,11 @@ export interface UpdateItemsFavoritesAction {
     payload: { items: ItemType[] };
 }
 
+export interface SearchFavoritesAction {
+    type: typeof SEARCH_FAVORITES;
+    payload: { favorites: ItemType[] };
+}
+
 export type ItemsActionTypes =
     | GetItemsAction
     | SortByTitleItemsAction
@@ -64,4 +70,5 @@ export type ItemsActionTypes =
     | GetFavoritesAction
     | AddToFavoritesAction
     | RemoveFromFavoritesAction
-    | UpdateItemsFavoritesAction;
+    | UpdateItemsFavoritesAction
+    | SearchFavoritesAction;

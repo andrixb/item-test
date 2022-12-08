@@ -1,4 +1,4 @@
-import { Divider, Modal, Typography } from '@mui/material';
+import { Button, Divider, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { ItemType } from '../../domain/entities';
 import { useFavoritesModalStyles } from '../styles';
@@ -9,11 +9,19 @@ interface FavoritesModalProps {
     open: boolean;
     handleClose: (event: React.SyntheticEvent) => void;
     handleSearch: (event: React.SyntheticEvent) => void;
+    handleClearSearchFavorites: (event: React.SyntheticEvent) => void;
     onChangeTitle: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     favorites?: ItemType[];
 }
 
-export const FavoritesModal = ({ open, handleClose, handleSearch, onChangeTitle, favorites }: FavoritesModalProps) => {
+export const FavoritesModal = ({
+    open,
+    handleClose,
+    handleSearch,
+    handleClearSearchFavorites,
+    onChangeTitle,
+    favorites,
+}: FavoritesModalProps) => {
     const classes = useFavoritesModalStyles();
     return (
         <Modal
@@ -26,6 +34,7 @@ export const FavoritesModal = ({ open, handleClose, handleSearch, onChangeTitle,
                 <Typography variant="h2">Your Favorites</Typography>
                 <Divider />
                 <br />
+                
                 {favorites?.length === 0 && (
                     <Box component="div">
                         <Typography variant="h3">No Favorites</Typography>
@@ -34,7 +43,16 @@ export const FavoritesModal = ({ open, handleClose, handleSearch, onChangeTitle,
 
                 {!!favorites && (
                     <>
-                        <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
+                        <Box component="div" className={classes.clearSearchBtn}>
+                            <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
+                            <Button
+                                className={classes.clearSearchBtn}
+                                variant="text"
+                                onClick={handleClearSearchFavorites}
+                            >
+                                Clear search
+                            </Button>
+                        </Box>
                         <ListContainer items={favorites} />
                     </>
                 )}

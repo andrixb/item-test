@@ -1,6 +1,13 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { ItemType } from '../../domain/entities';
-import { ADD_FAVORITE, GET_FAVORITES, ItemsActionTypes, REMOVE_FAVORITE, UPDATE_ITEMS_FAVORITES } from '../actions';
+import {
+    ADD_FAVORITE,
+    GET_FAVORITES,
+    ItemsActionTypes,
+    REMOVE_FAVORITE,
+    SEARCH_FAVORITES,
+    UPDATE_ITEMS_FAVORITES,
+} from '../actions';
 import { ItemContext } from '../contexts';
 import { ItemsState } from '../interfaces';
 
@@ -11,6 +18,23 @@ export const useFavorites = () => {
     }
 
     const [state, dispatch] = context;
+    const [title, setTitle] = useState<string>('');
+    const onChangeTitleFavorites = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+        setTitle(e.currentTarget.value);
+
+    const handleSearchFavorites = (event: React.SyntheticEvent) => {
+        event.preventDefault();
+
+        if (typeof state === 'object' && typeof dispatch === 'function') {
+            const foundFavorites = state.items?.filter((item: ItemType) =>
+                item.title?.toLowerCase().includes(title?.toLowerCase() ?? '')
+            );
+
+            dispatch({ type: SEARCH_FAVORITES, payload: { favorites: foundFavorites } });
+        }
+    };
+
+    const handleClearSearchFavorites = (event: React.SyntheticEvent) => getFavorites();
 
     const findItem = (id: string, itemState: ItemsState) => itemState.items.find((item: ItemType) => item.id === id);
     const findFavorites = (id: string, itemState: ItemsState) =>
@@ -81,6 +105,8 @@ export const useFavorites = () => {
     return {
         favorites: typeof state === 'object' ? state.favorites : [],
         handleFavorites,
-        getFavorites,
+        handleSearchFavorites,
+        handleClearSearchFavorites,
+        onChangeTitleFavorites,
     };
 };

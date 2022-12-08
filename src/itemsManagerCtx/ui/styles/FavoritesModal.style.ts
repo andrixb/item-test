@@ -22,4 +22,7 @@ export const useFavoritesModalStyles = makeStyles((theme: FavoriteModalStylesThe
         padding: 32,
         overflow: 'scroll',
     },
+    clearSearchBtn: {
+        width: '100%',
+    },
 }));

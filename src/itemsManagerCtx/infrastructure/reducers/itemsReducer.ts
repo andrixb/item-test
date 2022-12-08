@@ -9,6 +9,7 @@ import {
     GET_FAVORITES,
     REMOVE_FAVORITE,
     UPDATE_ITEMS_FAVORITES,
+    SEARCH_FAVORITES,
 } from '../actions';
 import { ItemsState } from '../interfaces';
 
@@ -59,6 +60,12 @@ export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
             return {
                 ...state,
                 items: payload.items,
+            };
+
+        case SEARCH_FAVORITES:
+            return {
+                ...state,
+                favorites: payload.favorites,
             };
 
         default:

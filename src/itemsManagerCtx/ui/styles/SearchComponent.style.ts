@@ -35,7 +35,6 @@ export const useSearchComponentStyles = makeStyles((theme: SearchComponentStyles
     },
 
     buttonWrapper: {
-        marginTop: 4,
         width: '100%',
     },
 
