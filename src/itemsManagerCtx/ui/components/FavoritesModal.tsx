@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Typography } from '@mui/material';
+import { Divider, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { ItemType } from '../../domain/entities';
 import { useFavoritesModalStyles } from '../styles';
@@ -8,8 +8,7 @@ import { SearchComponent } from './SearchComponent';
 interface FavoritesModalProps {
     open: boolean;
     handleClose: (event: React.SyntheticEvent) => void;
-    handleSearch: (event: React.SyntheticEvent) => void;
-    handleClearSearchFavorites: (event: React.SyntheticEvent) => void;
+    handleSearchFavorites: (event: React.SyntheticEvent) => void;
     onChangeTitle: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     favorites?: ItemType[];
 }
@@ -17,8 +16,7 @@ interface FavoritesModalProps {
 export const FavoritesModal = ({
     open,
     handleClose,
-    handleSearch,
-    handleClearSearchFavorites,
+    handleSearchFavorites,
     onChangeTitle,
     favorites,
 }: FavoritesModalProps) => {
@@ -50,18 +48,7 @@ export const FavoritesModal = ({
                 {!!favorites && (
                     <>
                         <Box component="div" className={classes.clearSearchBtn}>
-                            {favorites.length > 0 && (
-                                <>
-                                    <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
-                                    <Button
-                                        className={classes.clearSearchBtn}
-                                        variant="text"
-                                        onClick={handleClearSearchFavorites}
-                                    >
-                                        Clear search
-                                    </Button>
-                                </>
-                            )}
+                            {favorites.length > 0 && <SearchComponent handleSearch={handleSearchFavorites} onChangeTitle={onChangeTitle} />}
                         </Box>
                         <ListContainer items={favorites} />
                     </>

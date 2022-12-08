@@ -30,7 +30,7 @@ export const useFavorites = () => {
             localStorage.setItem('favorites', JSON.stringify(payload));
 
             dispatch({ type: ADD_FAVORITE, payload });
-            dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList?.items ?? []} });
+            dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList?.items ?? [] } });
         },
         []
     );
@@ -76,7 +76,7 @@ export const useFavorites = () => {
                 if (existsInFavorites) {
                     await removeFromFavorites(itemId, stateItems, dispatch);
                 }
-            } catch (e){
+            } catch (e) {
                 throw new Error(`${e}`);
             }
         },
@@ -100,11 +100,13 @@ export const useFavorites = () => {
         if (typeof state === 'object' && typeof dispatch === 'function') {
             const foundFavorites = await findByTitle(state, title);
 
-            dispatch({ type: SEARCH_FAVORITES, payload: { favorites: foundFavorites } });
+            if (foundFavorites) {
+                dispatch({ type: SEARCH_FAVORITES, payload: { favorites: foundFavorites } });
+            } else {
+                getFavorites();
+            }
         }
     };
-
-    const handleClearSearchFavorites = (event: React.SyntheticEvent) => { setTitle('');};
 
     const handleFavorites = (e: React.SyntheticEvent) => {
         const itemId = e.currentTarget.id ? e.currentTarget.id : '';
@@ -117,7 +119,6 @@ export const useFavorites = () => {
         favorites: typeof state === 'object' ? state.favorites : [],
         handleFavorites,
         handleSearchFavorites,
-        handleClearSearchFavorites,
         onChangeTitleFavorites,
     };
 };

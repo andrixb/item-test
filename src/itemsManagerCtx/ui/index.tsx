@@ -10,7 +10,7 @@ function ItemsManagerPageHome() {
     const handleOpenFavoritesModal = (event: React.SyntheticEvent) => handleOpenModal(event);
 
     const { items, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
-    const { favorites, handleSearchFavorites, handleClearSearchFavorites, onChangeTitleFavorites } = useFavorites();
+    const { favorites, handleSearchFavorites, onChangeTitleFavorites } = useFavorites();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
     const { handleCloseModal, handleOpenModal, openModal } = useFavoritesModal();
 
@@ -22,8 +22,7 @@ function ItemsManagerPageHome() {
                 favorites={favorites}
                 handleClose={handleCloseModal}
                 open={openModal}
-                handleSearch={handleSearchFavorites}
-                handleClearSearchFavorites={handleClearSearchFavorites}
+                handleSearchFavorites={handleSearchFavorites}
                 onChangeTitle={onChangeTitleFavorites}
             />
             <Box>
