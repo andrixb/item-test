@@ -29,6 +29,7 @@ export const FavoritesModal = ({
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            data-test="favorites-modal"
         >
             <Box className={classes.root}>
                 <Box component="div" className={classes.headerContainer}>

@@ -19,13 +19,13 @@ export const ListItemComponent = ({
     children,
     handleFavorites,
 }: ListItemComponentProps) => (
-    <ListItem component="div" style={{ padding: '1rem 0.5rem' }} key={`item-${id}`}>
+    <ListItem component="div" style={{ padding: '1rem 0.5rem' }} key={`item-${id}`} data-test="item-in-list">
         <Card sx={{ maxWidth: '100%' }}>
-            {!!title && <CardHeader title={title} />}
+            {!!title && <CardHeader title={title} data-test="item-title" />}
             {!!image && <CardMedia component="img" height="auto" image={image} alt={title} />}
             {!!children && <CardContent>{children}</CardContent>}
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" id={id} onClick={handleFavorites}>
+                <IconButton aria-label="add to favorites" id={id} onClick={handleFavorites} data-test="add-to-favorites">
                     <FavoriteIcon sx={isFavorite ? { color: lightRed } : { color: darkMediumGrey }} />
                 </IconButton>
             </CardActions>

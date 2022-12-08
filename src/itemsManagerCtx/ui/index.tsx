@@ -31,7 +31,8 @@ function ItemsManagerPageHome() {
                                 Items Manager
                             </Typography>
                             <IconButton
-                                aria-label="add to favorites"
+                                aria-label="show favorites"
+                                data-test="show-favorites"
                                 className={classes.favoriteIconWrapper}
                                 onClick={handleOpenFavoritesModal}
                             >
@@ -60,7 +61,7 @@ function ItemsManagerPageHome() {
                     </AppBar>
                 </Box>
                 {items.length > 0 && (
-                    <Box className={classes.searchResultsContainer}>
+                    <Box className={classes.searchResultsContainer} data-test="items-container">
                         <ListContainerVirtualised items={items} />
                     </Box>
                 )}

@@ -63,7 +63,12 @@ export const SearchComponent = ({
                     )}
                 </Box>
                 <Box component="div" className={classes.buttonWrapper}>
-                    <Button type="submit" variant="contained" className={classes.buttonElement}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        className={classes.buttonElement}
+                        data-test="btn-submit-search"
+                    >
                         Search
                     </Button>
                 </Box>

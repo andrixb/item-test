@@ -21,6 +21,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                         image={item.image}
                         isFavorite={item.isFavorite}
                         handleFavorites={handleFavorites}
+                        data-test="list-item"
                     >
                         <>
                             <Typography variant="h4">Description:</Typography>
