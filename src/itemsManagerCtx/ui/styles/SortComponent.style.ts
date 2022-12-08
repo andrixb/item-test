@@ -14,7 +14,11 @@ export const useSortComponentStyles = makeStyles((theme: SortComponentStylesThem
         display: 'flex',
         flexFlow: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
+        [theme.breakpoints.up('md')]: {
+            flexFlow: 'row',
+            justifyContent: 'flex-end',
+        },
     },
     sortWrapper: {
         marginRight: 4,
