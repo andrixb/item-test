@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { ItemType } from '../../domain/entities';
 import { ADD_FAVORITE, GET_FAVORITES, ItemsActionTypes, REMOVE_FAVORITE, UPDATE_ITEMS_FAVORITES } from '../actions';
 import { ItemContext } from '../contexts';
@@ -23,19 +23,18 @@ export const useFavorites = () => {
         return itemsState;
     };
 
-    const addToFavorites = (
-        itemToAdd: ItemType,
-        itemsState: ItemsState,
-        dispatch: (value: ItemsActionTypes) => void
-    ) => {
-        itemToAdd.isFavorite = true;
-        const payload = { favorites: [...itemsState.favorites, itemToAdd] };
-        const updatedItemsList = updateItemsList(itemToAdd, itemsState);
-        // here should be available an EP for storing favorites
-        localStorage.setItem('favorites', JSON.stringify(payload));
-        dispatch({ type: ADD_FAVORITE, payload });
-        dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList.items } });
-    };
+    const addToFavorites = useCallback(
+        (itemToAdd: ItemType, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
+            itemToAdd.isFavorite = true;
+            const payload = { favorites: [...itemsState.favorites, itemToAdd] };
+            const updatedItemsList = updateItemsList(itemToAdd, itemsState);
+            // here should be available an EP for storing favorites
+            localStorage.setItem('favorites', JSON.stringify(payload));
+            dispatch({ type: ADD_FAVORITE, payload });
+            dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList.items } });
+        },
+        []
+    );
 
     const removeFromFavorites = useCallback(
         (itemId: string, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
@@ -63,24 +62,21 @@ export const useFavorites = () => {
         }
     }, [dispatch]);
 
-    const handleFavorites = useCallback(
-        (e: React.SyntheticEvent) => {
-            const itemId = e.currentTarget.id ? e.currentTarget.id : '';
-            if (typeof state === 'object' && typeof dispatch === 'function') {
-                const existsInFavorites = findFavorites(itemId, state);
-                if (!existsInFavorites) {
-                    const itemToAdd = findItem(itemId, state);
-                    if (itemToAdd) {
-                        addToFavorites(itemToAdd, state, dispatch);
-                    }
-                }
-                if (existsInFavorites) {
-                    removeFromFavorites(itemId, state, dispatch);
+    const handleFavorites = (e: React.SyntheticEvent) => {
+        const itemId = e.currentTarget.id ? e.currentTarget.id : '';
+        if (typeof state === 'object' && typeof dispatch === 'function') {
+            const existsInFavorites = findFavorites(itemId, state);
+            if (!existsInFavorites) {
+                const itemToAdd = findItem(itemId, state);
+                if (itemToAdd) {
+                    addToFavorites(itemToAdd, state, dispatch);
                 }
             }
-        },
-        [state, dispatch, removeFromFavorites]
-    );
+            if (existsInFavorites) {
+                removeFromFavorites(itemId, state, dispatch);
+            }
+        }
+    };
 
     return {
         favorites: typeof state === 'object' ? state.favorites : [],

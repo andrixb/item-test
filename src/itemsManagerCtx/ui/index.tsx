@@ -7,7 +7,7 @@ import { useItemsManagerPageHomeStyles } from './styles';
 function ItemsManagerPageHome() {
     const classes = useItemsManagerPageHomeStyles();
     const handleOpenFavoritesModal = (event: React.SyntheticEvent) => handleOpenModal(event);
-    
+
     const { items, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
     const { favorites } = useFavorites();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
@@ -15,7 +15,13 @@ function ItemsManagerPageHome() {
 
     return (
         <>
-            <FavoritesModal handleClose={handleCloseModal} open={openModal} favorites={favorites} />
+            <FavoritesModal
+                favorites={favorites}
+                handleClose={handleCloseModal}
+                open={openModal}
+                handleSearch={handleSearch}
+                onChangeTitle={onChangeTitle}
+            />
             <Box>
                 <Box>
                     <AppBar position="static" className={classes.appBar}>

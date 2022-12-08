@@ -8,16 +8,12 @@ import { SearchComponent } from './SearchComponent';
 interface FavoritesModalProps {
     open: boolean;
     handleClose: (event: React.SyntheticEvent) => void;
-    // handleAddNewNote: (event: React.FormEvent<HTMLFormElement>) => void;
+    handleSearch: (event: React.SyntheticEvent) => void;
+    onChangeTitle: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     favorites?: ItemType[];
 }
 
-export const FavoritesModal = ({
-    open,
-    handleClose,
-    // handleAddNewNote,
-    favorites,
-}: FavoritesModalProps) => {
+export const FavoritesModal = ({ open, handleClose, handleSearch, onChangeTitle, favorites }: FavoritesModalProps) => {
     const classes = useFavoritesModalStyles();
     return (
         <Modal
@@ -38,7 +34,7 @@ export const FavoritesModal = ({
 
                 {!!favorites && (
                     <>
-                        {/* <SearchComponent /> */}
+                        <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
                         <ListContainer items={favorites} />
                     </>
                 )}

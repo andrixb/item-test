@@ -34,7 +34,7 @@ export const useItems = () => {
                 dispatch({ type: GET_ITEMS, payload: { items } });
             }
         },
-        [email, title, description, price]
+        [email, title, description, price, dispatch]
     );
 
     return {
