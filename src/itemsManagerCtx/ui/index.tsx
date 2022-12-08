@@ -62,9 +62,13 @@ function ItemsManagerPageHome() {
                         )}
                     </AppBar>
                 </Box>
-                {items.length > 0 && (
+                {items.length > 0 ? (
                     <Box className={classes.searchResultsContainer} data-test="items-container">
                         <ListContainerVirtualised items={items} />
+                    </Box>
+                ) : (
+                    <Box>
+                        <Typography variant="h2">Start searching</Typography>
                     </Box>
                 )}
             </Box>
