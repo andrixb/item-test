@@ -16,9 +16,10 @@ export const useFavoritesModalStyles = makeStyles((theme: FavoriteModalStylesThe
         left: '50%',
         transform: 'translate(-50%, -50%)',
         minWidth: 400,
+        height: '90vh',
         backgroundColor: white,
         border: '2px solid #000',
         padding: 32,
-        overflowY: 'scroll',
+        overflow: 'scroll',
     },
 }));
