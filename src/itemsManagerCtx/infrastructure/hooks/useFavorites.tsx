@@ -30,7 +30,7 @@ export const useFavorites = () => {
             localStorage.setItem('favorites', JSON.stringify(payload));
 
             dispatch({ type: ADD_FAVORITE, payload });
-            dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList.items } });
+            dispatch({ type: UPDATE_ITEMS_FAVORITES, payload: { items: updatedItemsList?.items ?? []} });
         },
         []
     );
@@ -44,7 +44,7 @@ export const useFavorites = () => {
                 if (itemToRemove) {
                     itemToRemove.isFavorite = false;
                     const updatedItemsList = await updateItemsList(itemToRemove, itemsState);
-                    const payload = { items: updatedItemsList.items };
+                    const payload = { items: updatedItemsList?.items ?? [] };
 
                     dispatch({ type: UPDATE_ITEMS_FAVORITES, payload });
                 }
