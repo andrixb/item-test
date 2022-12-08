@@ -1,7 +1,9 @@
-import { Button, Divider, Modal, TextField, Typography } from '@mui/material';
+import { Divider, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { ItemType } from '../../domain/entities';
 import { useFavoritesModalStyles } from '../styles';
+import { ListContainer } from './ListContainer';
+import { SearchComponent } from './SearchComponent';
 
 interface FavoritesModalProps {
     open: boolean;
@@ -25,24 +27,21 @@ export const FavoritesModal = ({
             aria-describedby="modal-modal-description"
         >
             <Box className={classes.root}>
-                {favorites?.length === 0  && (
+                <Typography variant="h2">Your Favorites</Typography>
+                <Divider />
+                <br />
+                {favorites?.length === 0 && (
                     <Box component="div">
-                        <Typography variant="body2">No Favorites</Typography>
+                        <Typography variant="h3">No Favorites</Typography>
                     </Box>
                 )}
 
-                {!!favorites &&
-                    favorites?.map((favorite: ItemType) => (
-                        <Box component="div" key={favorite.id}>
-                            <Typography variant="body2">{favorite.title}</Typography>
-                        </Box>
-                    ))}
-                {/* {!!favorites && (
-                    <Box component="form" onSubmit={() => {}} noValidate sx={{ mt: 1 }} autoComplete="off">
-                        <TextField margin="normal" fullWidth label="New" name="favoriteModalContent" autoFocus />
-                        <Button type="submit">Add</Button>
-                    </Box>
-                )} */}
+                {!!favorites && (
+                    <>
+                        {/* <SearchComponent /> */}
+                        <ListContainer items={favorites} />
+                    </>
+                )}
             </Box>
         </Modal>
     );

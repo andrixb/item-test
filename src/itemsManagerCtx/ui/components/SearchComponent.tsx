@@ -3,11 +3,11 @@ import { Box } from '@mui/system';
 import { useSearchComponentStyles } from '../styles';
 
 interface SearchComponentProps {
-    handleSearch: (event: React.SyntheticEvent) => void;
-    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    onChangePrice: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    onChangeTitle: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    onChangeDescription: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleSearch?: (event: React.SyntheticEvent) => void;
+    onChangeEmail?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangePrice?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangeTitle?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChangeDescription?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export const SearchComponent = ({

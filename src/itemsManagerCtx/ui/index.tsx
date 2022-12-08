@@ -6,12 +6,12 @@ import { useItemsManagerPageHomeStyles } from './styles';
 
 function ItemsManagerPageHome() {
     const classes = useItemsManagerPageHomeStyles();
+    const handleOpenFavoritesModal = (event: React.SyntheticEvent) => handleOpenModal(event);
+    
     const { items, handleSearch, onChangeEmail, onChangePrice, onChangeTitle, onChangeDescription } = useItems();
     const { favorites } = useFavorites();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
-
     const { handleCloseModal, handleOpenModal, openModal } = useFavoritesModal();
-    const handleOpenFavoritesModal = (event: React.SyntheticEvent) => handleOpenModal(event);
 
     return (
         <>

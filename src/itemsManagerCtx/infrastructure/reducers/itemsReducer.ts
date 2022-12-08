@@ -8,6 +8,7 @@ import {
     ADD_FAVORITE,
     GET_FAVORITES,
     REMOVE_FAVORITE,
+    UPDATE_ITEMS_FAVORITES,
 } from '../actions';
 import { ItemsState } from '../interfaces';
 
@@ -53,6 +54,11 @@ export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
             return {
                 ...state,
                 favorites: payload.favorites,
+            };
+        case UPDATE_ITEMS_FAVORITES:
+            return {
+                ...state,
+                items: payload.items,
             };
 
         default:

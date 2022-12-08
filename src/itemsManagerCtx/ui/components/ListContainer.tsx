@@ -23,6 +23,7 @@ export const ListContainer = ({ items }: ListContainerProps) => {
                             id={item.id}
                             title={item.title}
                             image={item.image}
+                            isFavorite={item.isFavorite}
                             handleFavorites={handleFavorites}
                         >
                             <>
