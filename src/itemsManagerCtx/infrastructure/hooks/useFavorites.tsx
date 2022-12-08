@@ -26,10 +26,10 @@ export const useFavorites = () => {
         event.preventDefault();
 
         if (typeof state === 'object' && typeof dispatch === 'function') {
+            // this should be done against an EP
             const foundFavorites = state.items?.filter((item: ItemType) =>
                 item.title?.toLowerCase().includes(title?.toLowerCase() ?? '')
             );
-
             dispatch({ type: SEARCH_FAVORITES, payload: { favorites: foundFavorites } });
         }
     };
@@ -39,8 +39,8 @@ export const useFavorites = () => {
     const findItem = (id: string, itemState: ItemsState) => itemState.items.find((item: ItemType) => item.id === id);
     const findFavorites = (id: string, itemState: ItemsState) =>
         itemState.favorites.find((item: ItemType) => item.id === id);
-    const removedItems = (id: string, itemState: ItemsState) =>
-        itemState.items.filter((item: ItemType) => item.id !== id);
+    const removedFavorites = (id: string, itemState: ItemsState) =>
+        itemState.favorites.filter((item: ItemType) => item.id !== id);
     const updateItemsList = (updatedItem: ItemType, itemsState: ItemsState) => {
         const index = itemsState.items.indexOf(updatedItem);
         itemsState.items[index] = updatedItem;
@@ -62,7 +62,7 @@ export const useFavorites = () => {
 
     const removeFromFavorites = useCallback(
         (itemId: string, itemsState: ItemsState, dispatch: (value: ItemsActionTypes) => void) => {
-            const cleanedFavorites = removedItems(itemId, itemsState);
+            const cleanedFavorites = removedFavorites(itemId, itemsState);
             const itemToRemove = findItem(itemId, itemsState);
             if (cleanedFavorites && itemToRemove) {
                 itemToRemove.isFavorite = false;
@@ -79,9 +79,8 @@ export const useFavorites = () => {
 
     const getFavorites = useCallback(() => {
         const storeFavorites = localStorage.getItem('favorites');
-
         if (storeFavorites && typeof dispatch === 'function') {
-            const payload = JSON.parse(storeFavorites);
+            const payload = {favorites: JSON.parse(storeFavorites)};
             dispatch({ type: GET_FAVORITES, payload });
         }
     }, [dispatch]);
