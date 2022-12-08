@@ -72,3 +72,5 @@ export const itemsReducer = (state: ItemsState, action: ItemsActionTypes) => {
             throw new Error(`Unsupported action type: ${type}`);
     }
 };
+
+export type ItemsReducerType = typeof itemsReducer;

@@ -21,7 +21,8 @@ export async function getItems({ searchParams }: GetItemsRequest): Promise<Items
             return [] as unknown as ItemsResponse;
         }
 
-        return adaptItemsResponse(response.data);
+        const adaptedResponse = adaptItemsResponse(response.data);
+        return adaptedResponse;
     } catch (error) {
         throw new Error(`${error}`);
     }

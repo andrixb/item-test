@@ -3,6 +3,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { SearchComponent, SortComponent, FavoritesModal, ListContainerVirtualised } from './components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useItemsManagerPageHomeStyles } from './styles';
+import { useEffect } from 'react';
 
 function ItemsManagerPageHome() {
     const classes = useItemsManagerPageHomeStyles();
@@ -12,6 +13,8 @@ function ItemsManagerPageHome() {
     const { favorites, handleSearchFavorites, handleClearSearchFavorites, onChangeTitleFavorites } = useFavorites();
     const { handleSortByTitle, handleSortByDescription, handleSortByEmail, handleSortByPrice } = useSortItems();
     const { handleCloseModal, handleOpenModal, openModal } = useFavoritesModal();
+
+    useEffect(() => () => localStorage.setItem('favorites', JSON.stringify({})), []);
 
     return (
         <>

@@ -23,6 +23,10 @@ export const FavoritesModal = ({
     favorites,
 }: FavoritesModalProps) => {
     const classes = useFavoritesModalStyles();
+
+    console.log('favorites', favorites?.length);
+
+     
     return (
         <Modal
             open={open}
@@ -37,7 +41,7 @@ export const FavoritesModal = ({
                     <Divider />
                 </Box>
 
-                {!!favorites && favorites.length === 0 && (
+                {!favorites || favorites.length === 0 && (
                     <Box component="div">
                         <Typography variant="h3">No Favorites</Typography>
                     </Box>
@@ -46,7 +50,7 @@ export const FavoritesModal = ({
                 {!!favorites && (
                     <>
                         <Box component="div" className={classes.clearSearchBtn}>
-                            {favorites.length === 0 && (
+                            {favorites.length > 0 && (
                                 <>
                                     <SearchComponent handleSearch={handleSearch} onChangeTitle={onChangeTitle} />
                                     <Button
